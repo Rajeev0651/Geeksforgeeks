@@ -2,35 +2,39 @@
 using namespace std;
 int main()
 {
-    int T;
-    cin>>T;
-    while(T--)
+    int person;
+    int boat;
+    cin>>person>>boat;
+    int P[person], B[boat];
+    for(int i=0; i<person; i++)
+        cin>>P[i];
+    for(int i=0; i<boat; i++)
+        B[i];
+    sort(P, P+person, greater<int>());
+    sort(B, B+boat, greater<int>());
+    int ans=0, inc = 2, passes=0;
+    for(int i=0; i<person; i++)
     {
-        int N;
-        cin>>N;
-        int A[N];
-        for(int i=0; i<N; i++)
-            cin>>A[i];
-        int r=0,l=N-1,op=0;    
-        while(r<=l)
+        int flag = 0, x = 0;
+        for(int j=0; j<person; j++)
         {
-            if(A[r]==A[l])
+            if(P[j]!=-1)
             {
-                r++;l--;
-                continue;
-            }
-            if(A[r]<A[l])
-            {
-                A[r+1]+=A[r];r++;
-                op++;
-            }
-            else
-            {
-                A[l-1]+=A[l];l--;
-                op++;
+                flag = 1;
+                if(P[j]<=B[x])
+                {
+                    passes++;
+                    x++;
+                    P[j] = -1;
+                }
+                
             }
         }
-        cout<<op<<"\n";
+        if(passes==person)
+            inc = 1;
+        ans+=inc;
+        if(flag==0)
+            break; 
     }
-    return 0;
+    cout<<ans<<"\n";
 }
