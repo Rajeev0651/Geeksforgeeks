@@ -44,43 +44,33 @@ void printLevelOrder(Node* root)
     }
 }
 
-void printInorder(Node* node)
-{
-    if (node == NULL)
-        return;
-    printInorder(node->left);
-    cout << node->data << " ";
-    printInorder(node->right);
-}
 
-void printPreorder(Node* node)
-{
-    if (node == NULL)
-        return;
-    cout << node->data << " ";
-    printPreorder(node->left);
-    printPreorder(node->right);
-}
-
-void printPostorder(Node* node)
-{
-    if (node == NULL)
-        return;
-    printPostorder(node->left);
-    printPostorder(node->right);
-    cout << node->data << " ";
-}
 void solve()
 {
-    struct Node *root = newNode(1);
-    root->left        = newNode(2);
-    root->right       = newNode(3);
-    root->left->left  = newNode(4);
-    root->left->right = newNode(5);
-    printLevelOrder(root);cout<<endl;
-    printInorder(root);cout<<endl;
-    printPreorder(root);cout<<endl;
-    printPostorder(root);cout<<endl;
+    int in[] = {10, 12, 15, 25, 30, 36};
+    Node* tree = newNode(10);
+    queue<Node*> qu;
+    qu.push(tree);
+    qu.push(tree);
+    int N = 1;
+    while(N<=5)
+    {
+        qu.front()->left = newNode(in[N]);
+        qu.pop();
+        if(N+1<=5)
+            qu.front()->right = newNode(in[N+1]);
+        qu.push(qu.front()->left);
+        qu.push(qu.front()->left);
+        if(N+1<=5)
+        {
+            qu.push(qu.front()->right);
+            qu.push(qu.front()->right);
+        }
+        
+        qu.pop();
+        N+=2;
+    }
+    printLevelOrder(tree);
 }
 
 int main()

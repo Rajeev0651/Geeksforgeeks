@@ -1,5 +1,5 @@
 //Jai Shree Ram
-//
+//https://www.geeksforgeeks.org/construct-a-binary-tree-from-postorder-and-inorder/
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -44,43 +44,35 @@ void printLevelOrder(Node* root)
     }
 }
 
-void printInorder(Node* node)
+int search(int in[], int val, int N)
 {
-    if (node == NULL)
-        return;
-    printInorder(node->left);
-    cout << node->data << " ";
-    printInorder(node->right);
+    for(int i=0; i<N; i++)
+        if(in[i]==val)
+            return i;
+    return -1;
 }
 
-void printPreorder(Node* node)
+Node* compute(int in[], int post[], int N)
 {
-    if (node == NULL)
-        return;
-    cout << node->data << " ";
-    printPreorder(node->left);
-    printPreorder(node->right);
+    int pos = search(in, post[N-1], N);
+    Node* node = newNode(post[N-1]);
+    if(pos<0)
+        return node;
+    if(pos>0)
+        node->left = compute(in, post, pos);
+    if(pos<N-1)
+    {
+        node->right = compute(in+pos+1, post+pos, N-pos-1);
+    }
+    return node;
 }
 
-void printPostorder(Node* node)
-{
-    if (node == NULL)
-        return;
-    printPostorder(node->left);
-    printPostorder(node->right);
-    cout << node->data << " ";
-}
 void solve()
 {
-    struct Node *root = newNode(1);
-    root->left        = newNode(2);
-    root->right       = newNode(3);
-    root->left->left  = newNode(4);
-    root->left->right = newNode(5);
-    printLevelOrder(root);cout<<endl;
-    printInorder(root);cout<<endl;
-    printPreorder(root);cout<<endl;
-    printPostorder(root);cout<<endl;
+   int in[] = {4, 8, 2, 5, 1, 6, 3, 7};
+   int post[] = {8, 4, 5, 2, 6, 7, 3, 1};
+   Node* tree = compute(in, post, 8);
+   printLevelOrder(tree);
 }
 
 int main()
