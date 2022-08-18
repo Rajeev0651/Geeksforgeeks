@@ -4,3 +4,7 @@
 3. Probability of reaching a point with 2 or 3 steps at a time
 4. Number of n-digits non-decreasing integers
 5. Unique paths in a Grid with Obstacles
+6. Ways to sum to N using array elements with repetition allowed
+7. Longest alternating (positive and negative) subarray starting at every index
+8. Longest Increasing Subsequence
+9. Remove array end element to maximize the sum of product
