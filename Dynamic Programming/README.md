@@ -16,3 +16,5 @@
 15. Count number of ways to cover a distance
 16. Counts paths from a point to reach Origin
 17. Counting pairs when a person can form pair with at most one
+18. Count ways to express N as the sum of 1,3 and 4
+19. Count ways to reach the nth stair using step 1, 2 or 3
